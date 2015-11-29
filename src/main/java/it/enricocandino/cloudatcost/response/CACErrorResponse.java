@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * <p>
  * Distributed under the MIT License.
  */
-public class CACErrorResponse extends CACBaseResponse {
+public class CACErrorResponse extends CACResponse {
 
     private Integer error;
     @SerializedName("error_description")

@@ -18,8 +18,7 @@ public class ListServersRequest extends CACRequest<ListServersResponse> {
     @Override
     public Request buildRequest() {
         Request.Builder builder = new Request.Builder();
-        String url = CACClient.getBaseUrl()
-                + requestPath
+        String url = getUrl()
                 + "?key=" + cacClient.getApiKey()
                 + "&login=" + cacClient.getLogin();
         builder.url(url);

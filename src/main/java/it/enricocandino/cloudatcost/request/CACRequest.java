@@ -36,6 +36,10 @@ public abstract class CACRequest<T extends CACBaseResponse> {
         return this;
     }
 
+    public String getUrl() {
+        return CACClient.getBaseUrl() + requestPath;
+    }
+
     public abstract Request buildRequest();
 
     public void execute() {

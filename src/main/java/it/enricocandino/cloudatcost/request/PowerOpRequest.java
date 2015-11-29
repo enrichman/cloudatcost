@@ -13,21 +13,53 @@ import it.enricocandino.cloudatcost.response.ListServersResponse;
  */
 public class PowerOpRequest extends CACRequest<ListServersResponse> {
 
+    public enum ACTION {
+
+        ON("poweron"), OFF("poweroff"), RESET("reset");
+
+        private String action;
+
+        ACTION(String action) {
+            this.action = action;
+        }
+    }
+
+    private ACTION action;
+    private String sid;
+
     public PowerOpRequest(CACClient cacClient) {
         super(cacClient, ListServersResponse.class, "/powerop.php");
+    }
+
+    public ACTION getAction() {
+        return action;
+    }
+
+    public PowerOpRequest setAction(ACTION action) {
+        this.action = action;
+        return this;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public PowerOpRequest setSid(String sid) {
+        this.sid = sid;
+        return this;
     }
 
     @Override
     public Request buildRequest() {
         RequestBody formBody = new FormEncodingBuilder()
-                .add("key", cacClient.getApiKey())
-                .add("login", cacClient.getLogin())
-                .add("sid", "")
-                .add("action", "poweron")
+                .add("key",     cacClient.getApiKey())
+                .add("login",   cacClient.getLogin())
+                .add("sid", sid)
+                .add("action",  action.action)
                 .build();
 
         Request.Builder builder = new Request.Builder()
-                .url(CACClient.getBaseUrl() + requestPath)
+                .url(getUrl())
                 .post(formBody);
 
         return builder.build();
