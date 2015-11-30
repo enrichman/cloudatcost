@@ -4,14 +4,14 @@ import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import it.enricocandino.cloudatcost.CACClient;
-import it.enricocandino.cloudatcost.response.ListServersResponse;
+import it.enricocandino.cloudatcost.response.PowerOpResponse;
 
 /**
  * Copyright (c) 2015 Enrico Candino
  * <p>
  * Distributed under the MIT License.
  */
-public class PowerOpRequest extends CACRequest<ListServersResponse> {
+public class PowerOpRequest extends CACRequest<PowerOpResponse> {
 
     public enum ACTION {
 
@@ -28,7 +28,7 @@ public class PowerOpRequest extends CACRequest<ListServersResponse> {
     private String sid;
 
     public PowerOpRequest(CACClient cacClient) {
-        super(cacClient, ListServersResponse.class, "/powerop.php");
+        super(cacClient, PowerOpResponse.class, "/powerop.php");
     }
 
     public ACTION getAction() {

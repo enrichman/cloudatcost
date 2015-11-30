@@ -2,9 +2,9 @@ package it.enricocandino.cloudatcost;
 
 import com.squareup.okhttp.OkHttpClient;
 import it.enricocandino.cloudatcost.request.ListServersRequest;
+import it.enricocandino.cloudatcost.request.ListTasksRequest;
+import it.enricocandino.cloudatcost.request.ListTemplatesRequest;
 import it.enricocandino.cloudatcost.request.PowerOpRequest;
-
-import java.io.IOException;
 
 /**
  * Copyright (c) 2015 Enrico Candino
@@ -41,11 +41,19 @@ public class CACClient {
         return login;
     }
 
-    public ListServersRequest listServers() throws IOException {
+    public ListServersRequest listServers() {
         return new ListServersRequest(this);
     }
 
-    public PowerOpRequest powerOp() throws IOException {
+    public ListTemplatesRequest listTemplates() {
+        return new ListTemplatesRequest(this);
+    }
+
+    public ListTasksRequest listTasks() {
+        return new ListTasksRequest(this);
+    }
+
+    public PowerOpRequest powerOp() {
         return new PowerOpRequest(this);
     }
 

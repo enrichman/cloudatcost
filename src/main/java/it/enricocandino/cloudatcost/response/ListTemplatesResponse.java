@@ -1,6 +1,6 @@
 package it.enricocandino.cloudatcost.response;
 
-import it.enricocandino.cloudatcost.model.Server;
+import it.enricocandino.cloudatcost.model.Template;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  * <p>
  * Distributed under the MIT License.
  */
-public class ListServersResponse extends CACBaseResponse<List<Server>> {
+public class ListTemplatesResponse extends CACBaseResponse<List<Template>> {
 
 }

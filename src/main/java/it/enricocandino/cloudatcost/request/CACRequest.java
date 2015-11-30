@@ -21,8 +21,8 @@ public abstract class CACRequest<T extends CACBaseResponse> {
 
     protected CACClient cacClient;
     protected String requestPath;
-    private Class<T> clazz;
 
+    private Class<T> clazz;
     private CACCallback<T> callback;
 
     public CACRequest(CACClient cacClient, Class<T> clazz, String requestPath) {

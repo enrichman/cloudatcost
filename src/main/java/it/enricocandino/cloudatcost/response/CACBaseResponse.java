@@ -7,15 +7,24 @@ package it.enricocandino.cloudatcost.response;
  */
 public abstract class CACBaseResponse<T> extends CACResponse {
 
-    private String id;
+    private String api;
+    private String action;
     private T data;
 
-    public String getId() {
-        return id;
+    public String getApi() {
+        return api;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setApi(String api) {
+        this.api = api;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public T getData() {
