@@ -5,19 +5,9 @@ package it.enricocandino.cloudatcost.response;
  * <p>
  * Distributed under the MIT License.
  */
-public class PowerOpResponse extends CACBaseResponse<Void> {
+public class PowerOpResponse extends ResultResponse {
 
-    private String serverid;
     private Long taskid;
-    private String result;
-
-    public String getServerid() {
-        return serverid;
-    }
-
-    public void setServerid(String serverid) {
-        this.serverid = serverid;
-    }
 
     public Long getTaskid() {
         return taskid;
@@ -27,11 +17,4 @@ public class PowerOpResponse extends CACBaseResponse<Void> {
         this.taskid = taskid;
     }
 
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
 }

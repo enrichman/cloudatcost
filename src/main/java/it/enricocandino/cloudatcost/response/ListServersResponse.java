@@ -9,6 +9,6 @@ import java.util.List;
  * <p>
  * Distributed under the MIT License.
  */
-public class ListServersResponse extends CACBaseResponse<List<Server>> {
+public class ListServersResponse extends CACResponse<List<Server>> {
 
 }

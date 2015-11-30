@@ -9,6 +9,6 @@ import java.util.List;
  * <p>
  * Distributed under the MIT License.
  */
-public class ListTemplatesResponse extends CACBaseResponse<List<Template>> {
+public class ListTemplatesResponse extends CACResponse<List<Template>> {
 
 }

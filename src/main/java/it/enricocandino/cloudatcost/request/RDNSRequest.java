@@ -4,48 +4,37 @@ import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import it.enricocandino.cloudatcost.CACClient;
-import it.enricocandino.cloudatcost.response.PowerOpResponse;
+import it.enricocandino.cloudatcost.response.ResultResponse;
 
 /**
  * Copyright (c) 2015 Enrico Candino
  * <p>
  * Distributed under the MIT License.
  */
-public class PowerOpRequest extends CACRequest<PowerOpResponse> {
-
-    public enum ACTION {
-
-        ON("poweron"), OFF("poweroff"), RESET("reset");
-
-        private String action;
-
-        ACTION(String action) {
-            this.action = action;
-        }
-    }
+public class RDNSRequest extends CACRequest<ResultResponse> {
 
     private String sid;
-    private ACTION action;
+    private String hostname;
 
-    public PowerOpRequest(CACClient cacClient) {
-        super(cacClient, PowerOpResponse.class, "/powerop.php");
+    public RDNSRequest(CACClient cacClient) {
+        super(cacClient, ResultResponse.class, "/rdns.php");
     }
 
     public String getSid() {
         return sid;
     }
 
-    public PowerOpRequest setSid(String sid) {
+    public RDNSRequest setSid(String sid) {
         this.sid = sid;
         return this;
     }
 
-    public ACTION getAction() {
-        return action;
+    public String getHostname() {
+        return hostname;
     }
 
-    public PowerOpRequest setAction(ACTION action) {
-        this.action = action;
+    public RDNSRequest setHostname(String hostname) {
+        this.hostname = hostname;
         return this;
     }
 
@@ -55,7 +44,7 @@ public class PowerOpRequest extends CACRequest<PowerOpResponse> {
                 .add("key", cacClient.getApiKey())
                 .add("login", cacClient.getLogin())
                 .add("sid", sid)
-                .add("action", action.action)
+                .add("hostname", hostname)
                 .build();
 
         Request.Builder builder = new Request.Builder()

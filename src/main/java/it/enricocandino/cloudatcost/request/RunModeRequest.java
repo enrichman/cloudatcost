@@ -4,49 +4,49 @@ import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import it.enricocandino.cloudatcost.CACClient;
-import it.enricocandino.cloudatcost.response.PowerOpResponse;
+import it.enricocandino.cloudatcost.response.ResultResponse;
 
 /**
  * Copyright (c) 2015 Enrico Candino
  * <p>
  * Distributed under the MIT License.
  */
-public class PowerOpRequest extends CACRequest<PowerOpResponse> {
+public class RunModeRequest extends CACRequest<ResultResponse> {
 
-    public enum ACTION {
+    public enum MODE {
 
-        ON("poweron"), OFF("poweroff"), RESET("reset");
+        NORMAL("normal"), SAFE("safe");
 
-        private String action;
+        private String mode;
 
-        ACTION(String action) {
-            this.action = action;
+        MODE(String mode) {
+            this.mode = mode;
         }
     }
 
     private String sid;
-    private ACTION action;
+    private MODE mode;
 
-    public PowerOpRequest(CACClient cacClient) {
-        super(cacClient, PowerOpResponse.class, "/powerop.php");
+    public RunModeRequest(CACClient cacClient) {
+        super(cacClient, ResultResponse.class, "/runmode.php");
+    }
+
+    public RunModeRequest setMode(MODE mode) {
+        this.mode = mode;
+        return this;
     }
 
     public String getSid() {
         return sid;
     }
 
-    public PowerOpRequest setSid(String sid) {
+    public RunModeRequest setSid(String sid) {
         this.sid = sid;
         return this;
     }
 
-    public ACTION getAction() {
-        return action;
-    }
-
-    public PowerOpRequest setAction(ACTION action) {
-        this.action = action;
-        return this;
+    public MODE getMode() {
+        return mode;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class PowerOpRequest extends CACRequest<PowerOpResponse> {
                 .add("key", cacClient.getApiKey())
                 .add("login", cacClient.getLogin())
                 .add("sid", sid)
-                .add("action", action.action)
+                .add("mode", mode.mode)
                 .build();
 
         Request.Builder builder = new Request.Builder()

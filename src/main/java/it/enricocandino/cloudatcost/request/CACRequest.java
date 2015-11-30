@@ -1,14 +1,13 @@
 package it.enricocandino.cloudatcost.request;
 
-import com.google.gson.Gson;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import it.enricocandino.cloudatcost.CACCallback;
 import it.enricocandino.cloudatcost.CACClient;
 import it.enricocandino.cloudatcost.CACException;
-import it.enricocandino.cloudatcost.response.CACBaseResponse;
 import it.enricocandino.cloudatcost.response.CACErrorResponse;
+import it.enricocandino.cloudatcost.response.CACResponse;
 
 import java.io.IOException;
 
@@ -17,7 +16,7 @@ import java.io.IOException;
  * <p>
  * Distributed under the MIT License.
  */
-public abstract class CACRequest<T extends CACBaseResponse> {
+public abstract class CACRequest<T extends CACResponse> {
 
     protected CACClient cacClient;
     protected String requestPath;
@@ -71,11 +70,11 @@ public abstract class CACRequest<T extends CACBaseResponse> {
         try {
             String jsonResp = response.body().string();
 
-            if(response.isSuccessful()) {
-                T resp = new Gson().fromJson(jsonResp, clazz);
+            if (response.isSuccessful()) {
+                T resp = cacClient.parseJson(jsonResp, clazz);
                 callback.onSuccess(resp);
             } else {
-                CACErrorResponse resp = new Gson().fromJson(jsonResp, CACErrorResponse.class);
+                CACErrorResponse resp = cacClient.parseJson(jsonResp, CACErrorResponse.class);
                 callback.onError(resp);
             }
 

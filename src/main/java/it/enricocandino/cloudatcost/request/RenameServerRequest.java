@@ -4,48 +4,37 @@ import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import it.enricocandino.cloudatcost.CACClient;
-import it.enricocandino.cloudatcost.response.PowerOpResponse;
+import it.enricocandino.cloudatcost.response.ResultResponse;
 
 /**
  * Copyright (c) 2015 Enrico Candino
  * <p>
  * Distributed under the MIT License.
  */
-public class PowerOpRequest extends CACRequest<PowerOpResponse> {
-
-    public enum ACTION {
-
-        ON("poweron"), OFF("poweroff"), RESET("reset");
-
-        private String action;
-
-        ACTION(String action) {
-            this.action = action;
-        }
-    }
+public class RenameServerRequest extends CACRequest<ResultResponse> {
 
     private String sid;
-    private ACTION action;
+    private String name;
 
-    public PowerOpRequest(CACClient cacClient) {
-        super(cacClient, PowerOpResponse.class, "/powerop.php");
+    public RenameServerRequest(CACClient cacClient) {
+        super(cacClient, ResultResponse.class, "/renameserver.php");
     }
 
     public String getSid() {
         return sid;
     }
 
-    public PowerOpRequest setSid(String sid) {
+    public RenameServerRequest setSid(String sid) {
         this.sid = sid;
         return this;
     }
 
-    public ACTION getAction() {
-        return action;
+    public String getName() {
+        return name;
     }
 
-    public PowerOpRequest setAction(ACTION action) {
-        this.action = action;
+    public RenameServerRequest setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -55,7 +44,7 @@ public class PowerOpRequest extends CACRequest<PowerOpResponse> {
                 .add("key", cacClient.getApiKey())
                 .add("login", cacClient.getLogin())
                 .add("sid", sid)
-                .add("action", action.action)
+                .add("name", name)
                 .build();
 
         Request.Builder builder = new Request.Builder()
