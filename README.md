@@ -3,15 +3,81 @@ CloudAtCost
 
 CloudAtCost API client for Java applications
 
+-- still in development
+
+Download
+--------
+
+The library is still on development.
+
+If you want to try it add the OSS repository to your pom:
+
+```xml
+<repositories>
+    <repository>
+        <id>OSS</id>
+        <url>https://oss.sonatype.org/content/groups/public</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+```
+
+and check the latest snapshot from [here](https://oss.sonatype.org/content/groups/public/it/enricocandino/cloudatcost/1.0-SNAPSHOT/) 
+( currently: 1.0-20151130.225947-3 )
+
+Add the dependency via Gradle:
+```groovy
+compile 'it.enricocandino:enricocandino:1.0-20151130.225947-3'
+```
+or Maven:
+```xml
+<dependency>
+    <groupId>it.enricocandino</groupId>
+    <artifactId>cloudatcost</artifactId>
+    <version>1.0-20151130.225947-3</version>
+</dependency>
+```
+
 
 Examples
 --------
 
-```
+Create the client with your apiKey and login email
+```java
 CACClient cacClient = new CACClient(API_KEY, LOGIN);
+```
+
+Then define a callback and execute the request.
+For synchronous request you can call "execute".
+Call "async" for asynchronous ones.
+
+```java
+// sync
 cacClient.listServers().callback(callback).execute();
+
+// async
 cacClient.listServers().callback(callback).async();
 ```
+
+You can do all in one-line if you want:
+
+```java
+cacClient.powerOp()
+    .setSid("my-sid")
+    .setAction(PowerOpRequest.ACTION.ON)
+    .callback(powerOpCallback)
+    .async();
+```
+
+Check the [CloudAtCost API specification](https://github.com/cloudatcost/api) for more information.
+
+If you find any problem, please open an issue and feel free to contribute!
+
 
 Developed By
 --------
@@ -56,3 +122,4 @@ License
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
+    
