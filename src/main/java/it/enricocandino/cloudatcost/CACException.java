@@ -7,5 +7,7 @@ package it.enricocandino.cloudatcost;
  */
 public class CACException extends Exception {
 
-
+    public CACException(Throwable cause) {
+        super(cause);
+    }
 }

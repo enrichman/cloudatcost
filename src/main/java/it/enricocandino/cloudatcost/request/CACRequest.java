@@ -52,7 +52,7 @@ public abstract class CACRequest<T extends CACResponse> {
         }
     }
 
-    public void async() throws IOException {
+    public void async() {
         Request request = buildRequest();
         cacClient.getClient().newCall(request).enqueue(new Callback() {
 
@@ -84,7 +84,7 @@ public abstract class CACRequest<T extends CACResponse> {
     }
 
     private void handleException(IOException e) {
-        CACException exception = new CACException();
+        CACException exception = new CACException(e);
         callback.onException(exception);
     }
 }
