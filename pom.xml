@@ -6,8 +6,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>it.enricocandino</groupId>
-    <artifactId>cloudatcost</artifactId>
+    <artifactId>cloudatcost-parent</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>cloudatcost-test</module>
+        <module>cloudatcost</module>
+    </modules>
 
     <name>CloudAtCost</name>
     <description>A CloudAtCost API client for Java applications</description>
