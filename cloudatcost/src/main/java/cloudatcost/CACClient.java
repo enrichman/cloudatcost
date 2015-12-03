@@ -12,7 +12,12 @@ public class CACClient {
     private CACHttpClient cacHttpClient;
 
     public CACClient(String apiKey, String login) {
-        this.cacHttpClient = new CACHttpClient(apiKey, login);
+        CACHttpClient.Builder builder = new CACHttpClient.Builder(apiKey, login);
+        this.cacHttpClient = builder.build();
+    }
+
+    public CACClient(CACHttpClient cacHttpClient) {
+        this.cacHttpClient = cacHttpClient;
     }
 
     public ListServersRequest listServers() {

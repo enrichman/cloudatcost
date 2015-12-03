@@ -72,10 +72,13 @@ public abstract class CACRequest<T extends CACResponse> {
 
             if (response.isSuccessful()) {
                 T resp = cacHttpClient.parseJson(jsonResp, clazz);
-                callback.onSuccess(resp);
+                if (callback != null)
+                    callback.onSuccess(resp);
+
             } else {
                 CACErrorResponse resp = cacHttpClient.parseJson(jsonResp, CACErrorResponse.class);
-                callback.onError(resp);
+                if (callback != null)
+                    callback.onError(resp);
             }
 
         } catch (IOException e) {
@@ -85,6 +88,7 @@ public abstract class CACRequest<T extends CACResponse> {
 
     private void handleException(IOException e) {
         CACException exception = new CACException(e);
-        callback.onException(exception);
+        if (callback != null)
+            callback.onException(exception);
     }
 }
